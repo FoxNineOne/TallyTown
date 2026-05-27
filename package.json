@@ -1,0 +1,33 @@
+{
+  "name": "loyalty",
+  "version": "1.0.0",
+  "description": "A digital Loyalty card for local stores",
+  "homepage": "https://github.com/FoxNineOne/Loyalty#readme",
+  "bugs": {
+    "url": "https://github.com/FoxNineOne/Loyalty/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FoxNineOne/Loyalty.git"
+  },
+  "license": "ISC",
+  "author": "FoxNineOne",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.3",
+    "morgan": "^1.10.1",
+    "validator": "^13.15.35",
+    "xss-clean": "^0.1.4"
+  }
+}

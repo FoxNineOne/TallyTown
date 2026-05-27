@@ -1,29 +1,43 @@
-const express = require("express");
-const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
-// app.get("/health", (req, res) => {
-//   res.json({ ok: true, status: "up" });
-// });
+process.on("uncaughtException", (err) => {
+  console.log("UNCAUGHT EXCEPTION! Forcing shut down");
+  console.log(err.name, err.message);
 
-// app.listen(3000, () => {
-//   console.log("Server running at http://localhost:3000");
-// });
-
-app.use(express.json());
-app.use(express.text({ type: "text/plain" }));
-
-app.get("/health", (req, res) => {
-  res.json({ ok: true, status: "up" });
+  process.exit(1);
 });
 
-app.post("/test", (req, res) => {
-  res.json({
-    contentType: req.headers["content-type"],
-    bodyType: typeof req.body,
-    body: req.body,
+dotenv.config({ path: "./config.env" });
+const app = require("./app");
+
+//console.log(process.env);
+
+const DB = process.env.DATABASE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD,
+);
+
+mongoose.connect(DB).then(() => {
+  console.log("DB Connection successful");
+});
+
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
+
+process.on("unhandled rejection", (err) => {
+  console.log("UNHANDLED REJECTION! Forcing shut down");
+  console.log(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
   });
 });
 
-app.listen(3000, () => {
-  console.log("Express server running at http://localhost:3000");
+process.on("SIGTERM", () => {
+  console.log("👋 SIGTERM RECEIVED. Shutting down gracefully");
+  server.close(() => {
+    console.log("Process Terminated.");
+  });
 });

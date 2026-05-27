@@ -21,13 +21,13 @@ Table merchants {
   icon   string
 }
 
-Table merchantStaff
-{
-  _id ObjectId [primary key]
+Table loyaltyCampaigns {
+  _id objectId [primary key]
   merchant objectId
-  user objectId
-  role objectId
   active boolean
+  description string 
+  text string
+  requiredStamps integer
 }
 
 Table campaignProgress {
@@ -45,14 +45,18 @@ Table campaignProgress {
   redemeedAt timestamp
 }
 
-Table loyaltyCampaigns {
-  _id objectId [primary key]
+
+
+Table merchantStaff
+{
+  _id ObjectId [primary key]
   merchant objectId
+  user objectId
+  role objectId
   active boolean
-  description string 
-  text string
-  requiredStamps integer
 }
+
+
 Table LU_MerchantType {
   _id ObjectId
   description string 
