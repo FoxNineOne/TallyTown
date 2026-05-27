@@ -1,0 +1,63 @@
+
+
+Table users {
+  _id ObjectId [primary key]
+  username string
+  role objectId
+  created_at timestamp
+  active boolean
+  email string
+  passwordHash string
+}
+
+Table merchants {
+  _id ObjectId [primary key]
+  type ObjectId
+  name string
+  description string
+  active boolean
+  address string
+  location GeoJSON 
+  icon   string
+}
+
+Table merchantStaff
+{
+  _id ObjectId [primary key]
+  merchant objectId
+  user objectId
+  role objectId
+  active boolean
+}
+
+Table campaignProgress {
+  _id objectId [primary key]
+  campaign objectId
+  title varchar
+  merchant objectId
+  user integer [not null]
+  stamps {
+    _id objectId
+    stampedBy objectId
+    createdAt timestamp
+  }
+  redeemed boolean
+  redemeedAt timestamp
+}
+
+Table loyaltyCampaigns {
+  _id objectId [primary key]
+  merchant objectId
+  active boolean
+  description string 
+  text string
+  requiredStamps integer
+}
+Table LU_MerchantType {
+  _id ObjectId
+  description string 
+}
+Table LU_Roles {
+  _id ObjectId  [primary key]
+  description integer
+}
