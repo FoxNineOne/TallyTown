@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "6a1eeb33333ddc7e8f19c6e1",
+    "description": "user"
+  },
+  {
+    "_id": "6a1eeb3e333ddc7e8f19c6e2",
+    "description": "admin"
+  },
+  {
+    "_id": "6a1eeb4a333ddc7e8f19c6e3",
+    "description": "merchant_admin"
+  },
+  {
+    "_id": "6a1eeb65333ddc7e8f19c6e5",
+    "description": "merchant_staff"
+  }
+]

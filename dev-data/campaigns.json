@@ -1,0 +1,13 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1ef5e5333ddc7e8f19c6f4"
+    },
+    "merchant": {
+      "$oid": "6a1ef374333ddc7e8f19c6f2"
+    },
+    "active": true,
+    "description": "Buy 6 coffees, and the 7th is on us!",
+    "requiredStamps": 6
+  }
+]

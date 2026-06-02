@@ -16,7 +16,9 @@
   "main": "app.js",
   "scripts": {
     "test": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "clearDatabase": "node dev-data/delete-dev-data.js",
+    "importDatabase": "node dev-data/import-dev-data.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

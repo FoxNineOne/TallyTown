@@ -1,0 +1,18 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1efa72333ddc7e8f19c707"
+    },
+    "merchant": {
+      "$oid": "6a1ef374333ddc7e8f19c6f2"
+    },
+    "user": {
+      "$oid": "6a1ef9ef333ddc7e8f19c702"
+    },
+    "name": "Jiji Staff",
+    "role": {
+      "$oid": "6a1eeb4a333ddc7e8f19c6e3"
+    },
+    "active": true
+  }
+]

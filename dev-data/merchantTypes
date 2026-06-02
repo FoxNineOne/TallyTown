@@ -1,0 +1,20 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1eeae3333ddc7e8f19c6dd"
+    },
+    "description": "Cafe"
+  },
+  {
+    "_id": {
+      "$oid": "6a1eeb02333ddc7e8f19c6de"
+    },
+    "description": "Restaurant"
+  },
+  {
+    "_id": {
+      "$oid": "6a1eeb14333ddc7e8f19c6df"
+    },
+    "description": "Store"
+  }
+]

@@ -1,0 +1,60 @@
+[
+  {
+    "name": "Vulpine Coffee Lab",
+    "description": "Cleverly roasted coffee and artisan pastries in the heart of Duffield.",
+    "merchantType": {
+      "$oid": "6a1eeae3333ddc7e8f19c6dd"
+    },
+    "address": "20 Town St, Duffield, Derbyshire, DE56 4GD",
+    "photo": "FoxCoffeeLogo.png",
+    "location": {
+      "type": "Point",
+      "coordinates": [-0.133869, 51.510067]
+    },
+    "schedule": [
+      {
+        "day": 1,
+        "open": 540,
+        "close": 1080,
+        "label": "Monday 09:00 - 18:00"
+      },
+      {
+        "day": 2,
+        "open": 540,
+        "close": 1080,
+        "label": "Tuesday 09:00 - 18:00"
+      },
+      {
+        "day": 3,
+        "open": 540,
+        "close": 1080,
+        "label": "Wednesday 09:00 - 18:00"
+      },
+      {
+        "day": 4,
+        "open": 540,
+        "close": 1200,
+        "label": "Thursday 09:00 - 20:00"
+      },
+      {
+        "day": 5,
+        "open": 540,
+        "close": 1320,
+        "label": "Friday 09:00 - 22:00"
+      },
+      {
+        "day": 6,
+        "open": 600,
+        "close": 1320,
+        "label": "Saturday 10:00 - 22:00"
+      },
+      {
+        "day": 0,
+        "open": 660,
+        "close": 1020,
+        "label": "Sunday 11:00 - 17:00"
+      }
+    ],
+    "active": "true"
+  }
+]
