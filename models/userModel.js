@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
   },
   passwordConfirm: {
     type: String,
-    required: true,
+    required: false,
     validate: {
       // This only works on CRATE and SAVE!!! Not on update
       validator: function (el) {

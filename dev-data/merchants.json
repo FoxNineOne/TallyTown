@@ -2,9 +2,7 @@
   {
     "name": "Vulpine Coffee Lab",
     "description": "Cleverly roasted coffee and artisan pastries in the heart of Duffield.",
-    "merchantType": {
-      "$oid": "6a1eeae3333ddc7e8f19c6dd"
-    },
+    "merchantType": "6a1eeae3333ddc7e8f19c6dd",
     "address": "20 Town St, Duffield, Derbyshire, DE56 4GD",
     "photo": "FoxCoffeeLogo.png",
     "location": {

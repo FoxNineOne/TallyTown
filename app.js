@@ -5,6 +5,8 @@ const xss = require("xss-clean");
 const morgan = require("morgan");
 const app = express();
 
+const campaignRouter = require("./routes/campaignRoutes");
+
 // Logging if in Dev
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -12,9 +14,14 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Data sanitisation against NoSQL query injections
-app.use(mongoSanitize());
+// Not supporting Express5 yet!
+//app.use(mongoSanitize());
 
 // Data sanitisation against cross-site scripting attacks (XSS)
-app.use(xss());
+// ALSO NOT SUPPORT Express 5!
+//app.use(xss());
+
+// Routes
+app.use("/api/v1/campaigns", campaignRouter);
 
 module.exports = app;

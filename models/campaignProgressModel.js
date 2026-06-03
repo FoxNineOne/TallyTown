@@ -24,13 +24,15 @@ const campaignProgressSchema = new mongoose.Schema({
       createdAt: { type: Date, default: Date.now },
     },
   ],
+  // Make a post save to auto calculate this
+  completedStamps: { type: Number },
   redeemed: { type: Boolean, default: false },
   redeemedAt: { type: Date },
   redeemedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const campaignProgress = mongoose.model(
-  "CampaignProgress",
+  "campaign_progresses", //this is what dictates the mongoDB collection  name
   campaignProgressSchema,
 );
 

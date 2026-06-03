@@ -41,6 +41,44 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD,
 );
 
+const deleteData = async () => {
+  try {
+    let result;
+    //Role
+    console.log("Attemping Role data");
+    result = await Role.deleteMany();
+    console.log(result);
+    // Campaign Progress
+    console.log("Attempting Campaign Progress data");
+    result = await CampaignProgress.deleteMany();
+    console.log(result);
+    //campaigns
+    console.log("Attempting Campaign Data");
+    result = await Campaign.deleteMany();
+    console.log(result);
+    //Merchants
+    console.log("Attempting Merchant Data");
+    result = await Merchant.deleteMany();
+    console.log(result);
+    //Merchant Types
+    console.log("Attempting Merchant Data");
+    result = await MerchantTypes.deleteMany();
+    console.log(result);
+    //staff
+    console.log("Attempting Staff Data");
+    result = await Staff.deleteMany();
+    console.log(result);
+    ///user
+    console.log("Attempting User Data");
+    result = await User.deleteMany();
+    console.log(result);
+    // Finish
+  } catch (err) {
+    console.log(err);
+    process.exit();
+  }
+};
+
 const importData = async () => {
   try {
     let result;
@@ -84,5 +122,6 @@ const importData = async () => {
 mongoose.connect(DB).then(async () => {
   console.log("DB Connection successful");
   console.log("Attempting Insert of Data");
+  await deleteData();
   await importData();
 });
