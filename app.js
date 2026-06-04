@@ -6,7 +6,9 @@ const morgan = require("morgan");
 const app = express();
 
 const campaignRouter = require("./routes/campaignRoutes");
-
+const campaignProgressRouter = require("./routes/campaignProgressRoutes");
+const authRouter = require("./routes/authRoutes");
+const viewRouter = require("./routes/viewRoutes");
 // Logging if in Dev
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -21,7 +23,14 @@ if (process.env.NODE_ENV === "development") {
 // ALSO NOT SUPPORT Express 5!
 //app.use(xss());
 
+// Parse JSON
+app.use(express.json());
+
 // Routes
-app.use("/api/v1/campaigns", campaignRouter);
+app.use("/api/v1/campaign", campaignRouter);
+app.use("/api/v1/campaignprogress", campaignProgressRouter);
+app.use("/api/v1/login", authRouter);
+
+app.use("/", viewRouter);
 
 module.exports = app;

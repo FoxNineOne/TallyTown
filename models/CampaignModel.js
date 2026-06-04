@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Merchant = require("./merchantModel");
 
 const CampaignSchema = new mongoose.Schema({
   merchant: {
@@ -16,6 +17,14 @@ const CampaignSchema = new mongoose.Schema({
   },
   requiredStamps: { type: Number, required: true },
 });
+
+// QUERY MIDDLEWARE
+// CampaignSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: "merchant",
+//     select: "-__v",
+//   });
+// });
 
 const Campaign = mongoose.model("Campaign", CampaignSchema);
 

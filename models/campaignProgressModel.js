@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+require("./userModel");
+require("./campaignModel");
 
 const campaignProgressSchema = new mongoose.Schema({
   campaign: {
@@ -31,6 +33,21 @@ const campaignProgressSchema = new mongoose.Schema({
   redeemedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
+// QUERY MIDDLEWARE
+campaignProgressSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "merchant",
+    select: "name",
+  })
+    .populate({
+      path: "user",
+      select: "name",
+    })
+    .populate({
+      path: "campaign",
+      select: "description",
+    });
+});
 const campaignProgress = mongoose.model(
   "campaign_progresses", //this is what dictates the mongoDB collection  name
   campaignProgressSchema,

@@ -59,6 +59,16 @@ const userSchema = new mongoose.Schema({
   //passwordResetExpires: Date,
   active: { type: Boolean, default: true, select: false },
 });
+
+//instance method
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword,
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+  //return await (candidatePassword === userPassword);
+};
+
 /*
 userSchema.pre("save", async function (next) {
   // Only runs if password was modified
@@ -83,13 +93,6 @@ userSchema.pre(/^find/, function (next) {
   next();
 });
 
-//instance method
-userSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword,
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
 */
 
 // userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
