@@ -1,11 +1,21 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 
 function App() {
-  return <h1> Loyalty Local</h1>;
+  return (
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
