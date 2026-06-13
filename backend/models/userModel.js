@@ -66,7 +66,6 @@ userSchema.methods.correctPassword = async function (
   userPassword,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
-  //return await (candidatePassword === userPassword);
 };
 
 /*

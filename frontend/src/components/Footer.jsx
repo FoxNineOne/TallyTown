@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div class="footer">
+    <div className="footer">
       <br />
       <br />
       created by{" "}

@@ -38,8 +38,6 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body; //destructuring!
-  let passHash = await bcrypt.hash(password, 12);
-  console.log("PASSHASH:", passHash);
 
   try {
     if (email === "temp") {
@@ -67,11 +65,6 @@ exports.login = async (req, res, next) => {
     }
     //3) If all okay, send token to client
     createSendToken(user, 200, res);
-    // return res.status(200).json({
-    //   status: "success",
-    //   message:
-    //     "So far, the process works! This now needs to be implemented with a JWT token, then hash that password!",
-    // });
   } catch (err) {
     return res.status(500).json({
       status: "error",

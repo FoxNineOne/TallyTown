@@ -3,6 +3,7 @@ const express = require("express");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 
 const campaignRouter = require("./routes/campaignRoutes");
@@ -22,6 +23,13 @@ if (process.env.NODE_ENV === "development") {
 // Data sanitisation against cross-site scripting attacks (XSS)
 // ALSO NOT SUPPORT Express 5!
 //app.use(xss());
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 
 // Parse JSON
 app.use(express.json());

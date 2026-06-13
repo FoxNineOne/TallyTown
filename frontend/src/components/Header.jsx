@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <div class="header">
+    <div className="header">
       <h1>
         {" "}
         <a href="/">TallyTown</a>

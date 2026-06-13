@@ -24,9 +24,9 @@ function HomePage() {
       <h2> </h2>
       <br />
       <br />
-      <div class="body">
+      <div className="body">
         <br />
-        <div class="button-group">
+        <div className="button-group">
           <Button initialText="Login" onClick={() => navigate("/login")} />
           <Button
             initialText="Sign Up"
