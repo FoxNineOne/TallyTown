@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const merchantTypeSchema = new mongoose.Schema({
   description: {
@@ -13,4 +13,4 @@ const merchantTypeSchema = new mongoose.Schema({
 
 const merchantType = mongoose.model("merchant_types", merchantTypeSchema);
 
-module.exports = merchantType;
+export default merchantType;

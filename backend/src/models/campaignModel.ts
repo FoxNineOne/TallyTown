@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Merchant = require("./merchantModel");
+import mongoose from "mongoose";
+import Merchant from "./merchantModel.js";
 
 const CampaignSchema = new mongoose.Schema({
   merchant: {
@@ -28,4 +28,4 @@ const CampaignSchema = new mongoose.Schema({
 
 const Campaign = mongoose.model("Campaign", CampaignSchema);
 
-module.exports = Campaign;
+export default Campaign;

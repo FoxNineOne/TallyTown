@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const merchantSchema = new mongoose.Schema({
   name: {
@@ -38,4 +38,4 @@ const merchantSchema = new mongoose.Schema({
 
 const Merchant = mongoose.model("Merchant", merchantSchema);
 
-module.exports = Merchant;
+export default Merchant;

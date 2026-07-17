@@ -1,30 +1,43 @@
-const Role = require("../models/roleModel.js");
-const CampaignProgress = require("../models/campaignProgressModel.js");
-const Campaign = require("../models/campaignModel.js");
-const Merchant = require("../models/merchantModel.js");
-const MerchantTypes = require("../models/merchantTypeModel.js");
-const User = require("../models/userModel.js");
-const Staff = require("../models/staffModel.js");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
 
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+import Role from "../src/models/roleModel";
+import Campaign from "../src/models/campaignModel";
+import CampaignProgress from "../src/models/roleModel";
+import Merchant from "../src/models/merchantModel";
+import MerchantTypes from "../src/models/merchantTypeModel";
+import Staff from "../src/models/staffModel";
+import User from "../src/models/userModel";
 
-const fs = require("fs");
-const roles = JSON.parse(fs.readFileSync(`${__dirname}/roles.json`, "utf-8"));
+const roles = JSON.parse(
+  fs.readFileSync(path.join(import.meta.dirname, "roles.json"), "utf-8"),
+);
 const campaignProgresses = JSON.parse(
-  fs.readFileSync(`${__dirname}/campaignProgress.json`, "utf-8"),
+  fs.readFileSync(
+    path.join(import.meta.dirname, "campaignProgress.json"),
+    "utf-8",
+  ),
 );
 const campaigns = JSON.parse(
-  fs.readFileSync(`${__dirname}/campaigns.json`, "utf-8"),
+  fs.readFileSync(path.join(import.meta.dirname, "campaigns.json"), "utf-8"),
 );
 const merchants = JSON.parse(
-  fs.readFileSync(`${__dirname}/merchants.json`, "utf-8"),
+  fs.readFileSync(path.join(import.meta.dirname, "merchants.json"), "utf-8"),
 );
 const merchantTypes = JSON.parse(
-  fs.readFileSync(`${__dirname}/merchantTypes.json`, "utf-8"),
+  fs.readFileSync(
+    path.join(import.meta.dirname, "merchantTypes.json"),
+    "utf-8",
+  ),
 );
-const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
-const staffs = JSON.parse(fs.readFileSync(`${__dirname}/staff.json`, "utf-8"));
+const users = JSON.parse(
+  fs.readFileSync(path.join(import.meta.dirname, "users.json"), "utf-8"),
+);
+const staffs = JSON.parse(
+  fs.readFileSync(path.join(import.meta.dirname, "staff.json"), "utf-8"),
+);
 
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION! Forcing shut down");
@@ -36,9 +49,9 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "./config.env" });
 console.log(process.env.DATABASE);
 
-const DB = process.env.DATABASE.replace(
+const DB = process.env.DATABASE!.replace(
   "<PASSWORD>",
-  process.env.DATABASE_PASSWORD,
+  process.env.DATABASE_PASSWORD!,
 );
 
 const importData = async () => {

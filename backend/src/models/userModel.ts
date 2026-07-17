@@ -1,7 +1,7 @@
-const crypto = require("crypto");
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const validator = require("validator");
+//import crypto from "crypto";
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import validator from "validator";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     required: false,
     validate: {
       // This only works on CRATE and SAVE!!! Not on update
-      validator: function (el) {
+      validator: function (el: string): boolean {
         return el === this.password;
       },
       message: "Please ensure the passwords match",
@@ -62,8 +62,8 @@ const userSchema = new mongoose.Schema({
 
 //instance method
 userSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword,
+  candidatePassword: string,
+  userPassword: string,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
@@ -124,4 +124,4 @@ userSchema.pre(/^find/, function (next) {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+export default User;

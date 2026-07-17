@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION! Forcing shut down");
@@ -8,14 +8,14 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-dotenv.config({ path: "./config.env" });
-const app = require("./app");
+dotenv.config({ path: "config.env" });
+//console.log(process.cwd());
+//console.log(process.env.DATABASE);
+import app from "./app.js";
 
-//console.log(process.env);
-
-const DB = process.env.DATABASE.replace(
+const DB = process.env.DATABASE!.replace(
   "<PASSWORD>",
-  process.env.DATABASE_PASSWORD,
+  process.env.DATABASE_PASSWORD!,
 );
 
 mongoose.connect(DB).then(() => {

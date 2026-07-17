@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
-require("./userModel");
-require("./campaignModel");
+import mongoose from "mongoose";
+//import type { Query } from "mongoose";
+//import userModel from "./userModel.js";
+//import campaignModel from "./campaignModel.js";
 
 const campaignProgressSchema = new mongoose.Schema({
   campaign: {
@@ -34,7 +35,8 @@ const campaignProgressSchema = new mongoose.Schema({
 });
 
 // QUERY MIDDLEWARE
-campaignProgressSchema.pre(/^find/, function (next) {
+// TODO: Replace 'any' with the correct Query generic.
+campaignProgressSchema.pre(/^find/, function (this: any) {
   this.populate({
     path: "merchant",
     select: "name",
@@ -53,4 +55,4 @@ const campaignProgress = mongoose.model(
   campaignProgressSchema,
 );
 
-module.exports = campaignProgress;
+export default campaignProgress;

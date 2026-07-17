@@ -1,15 +1,17 @@
-const path = require("path");
-const express = require("express");
-const mongoSanitize = require("express-mongo-sanitize");
-const xss = require("xss-clean");
-const morgan = require("morgan");
-const cors = require("cors");
+import path from "path";
+import express from "express";
+
+//import mongoSanitize from "express-mongo-sanitize";
+//import xss from "xss-clean";
+import morgan from "morgan";
+import cors from "cors";
 const app = express();
 
-const campaignRouter = require("./routes/campaignRoutes");
-const campaignProgressRouter = require("./routes/campaignProgressRoutes");
-const authRouter = require("./routes/authRoutes");
-const viewRouter = require("./routes/viewRoutes");
+import campaignRouter from "./routes/campaignRoutes.js";
+import campaignProgressRouter from "./routes/campaignProgressRoutes.js";
+import authRouter from "./routes/authRoutes.js";
+import viewRouter from "./routes/viewRoutes.js";
+
 // Logging if in Dev
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -41,4 +43,4 @@ app.use("/api/v1/login", authRouter);
 
 app.use("/", viewRouter);
 
-module.exports = app;
+export default app;

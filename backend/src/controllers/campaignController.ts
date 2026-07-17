@@ -1,6 +1,11 @@
-const Campaign = require("../models/campaignModel");
+import Campaign from "../models/campaignModel.js";
+import type { Request, Response, NextFunction } from "express";
 
-exports.getAllCampaigns = async (req, res, next) => {
+const getAllCampaigns = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const campaigns = await Campaign.find();
 
@@ -11,14 +16,25 @@ exports.getAllCampaigns = async (req, res, next) => {
       data: { campaigns },
     });
   } catch (err) {
+    if (err instanceof Error) {
+      return res.status(500).json({
+        status: "error",
+        message: err.message,
+      });
+    }
+
     return res.status(500).json({
       status: "error",
-      message: err.message,
+      message: "Unknown error",
     });
   }
 };
 
-exports.getOneCampaign = async (req, res, next) => {
+const getOneCampaign = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   let campaign;
   try {
     campaign = await Campaign.findById(req.params.id);
@@ -35,16 +51,16 @@ exports.getOneCampaign = async (req, res, next) => {
       });
     }
   } catch (err) {
-    if (!campaign) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Campaign not found. Ensure you're using the correct id",
-      });
-    } else {
-      return res.status(500).json({
-        status: "error",
-        message: err.message,
-      });
-    }
+    const message = err instanceof Error ? err.message : "Unknown error";
+
+    return res.status(500).json({
+      status: "error",
+      message,
+    });
   }
+};
+
+export default {
+  getAllCampaigns,
+  getOneCampaign,
 };

@@ -1,8 +1,13 @@
-const Role = require("../models/roleModel.js");
-const CampaignProgress = require("../models/campaignProgressModel");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+import Role from "../src/models/roleModel";
+import Campaign from "../src/models/campaignModel";
+import CampaignProgress from "../src/models/roleModel";
+import Merchant from "../src/models/merchantModel";
+import MerchantTypes from "../src/models/merchantTypeModel";
+import Staff from "../src/models/staffModel";
+import User from "../src/models/userModel";
 
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION! Forcing shut down");
@@ -14,9 +19,9 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "./config.env" });
 console.log(process.env.DATABASE);
 
-const DB = process.env.DATABASE.replace(
+const DB = process.env.DATABASE!.replace(
   "<PASSWORD>",
-  process.env.DATABASE_PASSWORD,
+  process.env.DATABASE_PASSWORD!,
 );
 const deleteData = async () => {
   try {

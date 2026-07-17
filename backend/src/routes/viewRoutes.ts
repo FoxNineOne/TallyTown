@@ -1,9 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-
-const viewsController = require("../controllers/viewsController");
+import viewsController from "../controllers/viewsController.js";
 
 router.route("/").get(viewsController.home);
 router.route("/login").get(viewsController.login);
 
-module.exports = router;
+export default router;
