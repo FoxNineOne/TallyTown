@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 //import { useNavigate } from "react-router-dom";
 import "../App.css";
 
@@ -6,7 +6,13 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function Button({ initialText, onClick }) {
+  function Button({
+    initialText,
+    onClick,
+  }: {
+    initialText: string;
+    onClick?: (text: string, setText: Dispatch<SetStateAction<string>>) => void;
+  }) {
     const [text, setText] = useState(initialText);
 
     function handleClick() {
@@ -45,10 +51,13 @@ function LoginPage() {
       localStorage.setItem("jwt", data.token);
       //console.log(data);
     } catch (err) {
-      console.error(err.message);
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error(err);
+      }
     }
   }
-
   return (
     <div>
       <br />

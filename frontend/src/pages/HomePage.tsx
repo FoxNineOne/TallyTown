@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 function HomePage() {
   const navigate = useNavigate();
-  function Button({ initialText, onClick }) {
+  function Button({
+    initialText,
+    onClick,
+  }: {
+    initialText: string;
+    onClick?: (text: string, setText: Dispatch<SetStateAction<string>>) => void;
+  }) {
     const [text, setText] = useState(initialText);
 
     function handleClick() {

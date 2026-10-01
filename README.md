@@ -4,9 +4,9 @@
 For local and independant businesses, a simple, no fuss "one loyalty card" approach to the independant stores and cafes in your area. 
 
 Will allow users to: 
-  - see what businesses are nearby,
-  - when they are open
-  - Any loyaly offers available ("Buy 5 coffees, the 6th is free!")
+  - See what businesses are nearby,
+  - When they are open
+  - Any loyalty offers available ("Buy 5 coffees, the 6th is free!")
   - Redeem loyalty offers
   - Allow Merchants to supply small push notifications to customers ("We are closed Wednesday, but will be back Thursday!")
   

@@ -2,13 +2,13 @@
   "name": "loyalty",
   "version": "1.0.0",
   "description": "A digital Loyalty card for local stores",
-  "homepage": "https://github.com/FoxNineOne/Loyalty#readme",
+  "homepage": "https://github.com/FoxNineOne/TallyTown/readme",
   "bugs": {
-    "url": "https://github.com/FoxNineOne/Loyalty/issues"
+    "url": "https://github.com/FoxNineOne/TallyTown/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FoxNineOne/Loyalty.git"
+    "url": "git+https://github.com/FoxNineOne/TallyTown.git"
   },
   "license": "ISC",
   "author": "FoxNineOne",
