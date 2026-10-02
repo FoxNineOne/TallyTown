@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-//import type { Query } from "mongoose";
-//import userModel from "./userModel.js";
-//import campaignModel from "./campaignModel.js";
 
 const campaignProgressSchema = new mongoose.Schema({
   campaign: {

@@ -1,10 +1,11 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function Button({
     initialText,
@@ -49,6 +50,7 @@ function LoginPage() {
       console.log(res);
       const data = await res.json();
       localStorage.setItem("jwt", data.token);
+      navigate("/progress");
       //console.log(data);
     } catch (err) {
       if (err instanceof Error) {
