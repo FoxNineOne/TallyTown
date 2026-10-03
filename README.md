@@ -18,7 +18,7 @@ The customer-facing side of the application is currently being developed, with t
 
 ### Currently working
 
-* React frontend migrated to TypeScript
+* React frontend writtein in TypeScript
 * Vite development environment
 * Customer login flow
 * Customer loyalty progress page
@@ -151,7 +151,7 @@ The backend uses Mongoose models to manage MongoDB documents.
 
 * Node.js
 * Express
-* JavaScript / TypeScript migration in progress
+* TypeScript
 * REST API
 
 ### Database
@@ -291,9 +291,8 @@ TallyTown is being built incrementally.
 * [ ] Production data flow
 * [ ] Image storage
 * [ ] Deployment
-* [ ] AWS integration
 * [ ] Production security
-* [ ] Automated testing
+
 
 ---
 
@@ -306,7 +305,7 @@ The project gives me an opportunity to work across the full stack, including:
 * Designing a relational-style data model in MongoDB
 * Building REST APIs
 * Connecting a React frontend to a backend
-* Migrating JavaScript code to TypeScript
+* TypeScript
 * Managing application state
 * Designing user interfaces
 * Handling authentication and permissions
