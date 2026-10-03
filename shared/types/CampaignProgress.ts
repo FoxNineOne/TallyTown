@@ -14,6 +14,7 @@ export interface CampaignProgress {
   merchant: {
     _id: string;
     name: string;
+    photo: string;
   };
   user: {
     _id: string;

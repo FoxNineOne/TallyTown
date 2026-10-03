@@ -64,7 +64,9 @@ const getAllCampaignsForUser = async (
   res: Response,
 ) => {
   try {
-    const campaigns = await CampaignProgress.find({ user: req.params.id });
+    const campaigns = await CampaignProgress.find({ user: req.params.id }).sort(
+      { _id: 1 },
+    );
     if (!campaigns) {
       return res.status(404).json({
         status: "fail",

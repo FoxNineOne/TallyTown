@@ -36,6 +36,9 @@ app.use(
 // Parse JSON
 app.use(express.json());
 
+// Static files
+app.use(express.static("public"));
+
 // Routes
 app.use("/api/v1/campaign", campaignRouter);
 app.use("/api/v1/campaignprogress", campaignProgressRouter);

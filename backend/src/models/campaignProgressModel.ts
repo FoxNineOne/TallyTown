@@ -36,7 +36,7 @@ const campaignProgressSchema = new mongoose.Schema({
 campaignProgressSchema.pre(/^find/, function (this: any) {
   this.populate({
     path: "merchant",
-    select: "name",
+    select: "name photo",
   })
     .populate({
       path: "user",
