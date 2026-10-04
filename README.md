@@ -1,4 +1,9 @@
 # TallyTown
+![TypeScript](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/-MongoDB-13aa52?style=flat-square&logo=mongodb&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Express](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=fff&style=flat)
 
 > A simple loyalty and local discovery platform connecting customers with independent businesses.
 
@@ -7,6 +12,13 @@ TallyTown is a full-stack web application currently under development.
 The idea is to create a simple, image-focused platform where customers can discover local businesses, follow their favourites, and collect digital loyalty stamps. Businesses can publish updates and manage customer loyalty campaigns through a dedicated staff interface.
 
 The project is also being used as a practical way to develop my skills in **React, TypeScript, Node.js, Express, MongoDB and AWS** while building something from the ground up.
+
+
+<p align="center">
+  <img src="./readme/MyCards.gif" width="50%">
+
+</p>
+
 
 ---
 
