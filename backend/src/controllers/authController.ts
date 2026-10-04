@@ -8,6 +8,10 @@ import type { Request, Response, NextFunction } from "express";
 
 import type { CookieOptions } from "express";
 
+interface IdParams {
+  id: string;
+}
+
 //const { promisify } = require("util");
 //const crypto = require("crypto");
 const expires = process.env.JWT_EXPIRES_IN!;
@@ -79,7 +83,15 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 //TODO
-const logout = (req: Request, res: Response) => {};
+const logout = (req: Request<IdParams>, res: Response) => {
+  res.cookie("jwt", "loggedout", {
+    expires: new Date(Date.now() + 10000),
+    httpOnly: true,
+  });
+  res
+    .status(200)
+    .json({ status: "success", message: "You are now logged out!" });
+};
 
 // TODO
 const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {

@@ -1,6 +1,10 @@
 import Campaign from "../models/campaignModel.js";
 import type { Request, Response, NextFunction } from "express";
 
+interface IdParams {
+  id: string;
+}
+
 const getAllCampaigns = async (
   req: Request,
   res: Response,
@@ -60,7 +64,41 @@ const getOneCampaign = async (
   }
 };
 
+const getAllCampaignsForOneMerchant = async (
+  req: Request<IdParams>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const campaigns = await Campaign.find({ merchant: req.params.id }).sort({
+      _id: -1,
+    });
+
+    //TODO middleware - only roles with admin should see inactive types.
+
+    // SEND RESPONSE
+    res.status(200).json({
+      status: "success",
+      results: campaigns.length,
+      data: { campaigns },
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      return res.status(500).json({
+        status: "error",
+        message: err.message,
+      });
+    }
+
+    return res.status(500).json({
+      status: "error",
+      message: "Unknown error",
+    });
+  }
+};
+
 export default {
   getAllCampaigns,
   getOneCampaign,
+  getAllCampaignsForOneMerchant,
 };

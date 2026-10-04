@@ -29,11 +29,17 @@ const campaignProgressSchema = new mongoose.Schema({
   redeemed: { type: Boolean, default: false },
   redeemedAt: { type: Date },
   redeemedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  reference: {
+    type: String,
+    required: false, // will generate after
+    minlength: 8,
+  },
 });
 
 // QUERY MIDDLEWARE
 // TODO: Replace 'any' with the correct Query generic.
 campaignProgressSchema.pre(/^find/, function (this: any) {
+  if (this.getOptions().skipPopulate) return;
   this.populate({
     path: "merchant",
     select: "name photo",
@@ -48,8 +54,9 @@ campaignProgressSchema.pre(/^find/, function (this: any) {
     });
 });
 const campaignProgress = mongoose.model(
-  "campaign_progresses", //this is what dictates the mongoDB collection  name
+  "campaign_progress", //this is what dictates the mongoDB collection  name
   campaignProgressSchema,
+  "campaign_progress",
 );
 
 export default campaignProgress;

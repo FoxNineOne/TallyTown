@@ -31,7 +31,7 @@ function LoginPage() {
     console.log(`email: ${email}`);
     console.log(`pass: ${password}`);
 
-    const url = `http://localhost:3000/api/v1/login`;
+    const url = `http://localhost:3000/api/v1/user/login`;
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -61,7 +61,7 @@ function LoginPage() {
     }
   }
   return (
-    <div>
+    <div className="page">
       <br />
       <h2>Login</h2>
       <div className="body">

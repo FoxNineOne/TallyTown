@@ -20,12 +20,12 @@ const userSchema = new mongoose.Schema({
       "Please ensure you use a valid email address",
     ],
   },
-  //photo: { type: String, default: "default.jpg" },
   role: {
     type: String,
     enum: ["user", "merchant_admin", "merchant_staff", "admin"],
     default: "user",
   },
+  photo: { type: String, default: "user_default.png" },
   password: {
     type: String,
     required: [true, "Password provide a password"],

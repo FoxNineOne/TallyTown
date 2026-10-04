@@ -11,6 +11,7 @@ import campaignRouter from "./routes/campaignRoutes.js";
 import campaignProgressRouter from "./routes/campaignProgressRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 import viewRouter from "./routes/viewRoutes.js";
+import merchantRouter from "./routes/merchantRoutes.js";
 
 // Logging if in Dev
 if (process.env.NODE_ENV === "development") {
@@ -42,7 +43,8 @@ app.use(express.static("public"));
 // Routes
 app.use("/api/v1/campaign", campaignRouter);
 app.use("/api/v1/campaignprogress", campaignProgressRouter);
-app.use("/api/v1/login", authRouter);
+app.use("/api/v1/user", authRouter);
+app.use("/api/v1/merchant", merchantRouter);
 
 app.use("/", viewRouter);
 

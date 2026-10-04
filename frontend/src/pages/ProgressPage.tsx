@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import type { CampaignProgressResponse } from "../../../shared/types/CampaignProgress";
 import { getCampaignProgress } from "../api/campaignProgress";
 import "../App.css";
 
 function Progress() {
-  // TEMP
+  // TEMP TODO REMOVE THIS AND READ FROM JWT!!
   const userId = "6a1eebac333ddc7e8f19c6e7";
   //
   const [campaigns, setCampaigns] = useState<
@@ -28,7 +29,7 @@ function Progress() {
   }, []);
 
   return (
-    <div>
+    <div className="page">
       <br></br>
       <h1>My Cards</h1>
       <br></br>
@@ -62,40 +63,54 @@ function Progress() {
 
           return (
             <div className={`loyalty-card ${cardStatus}`} key={campaign._id}>
-              <h2>{campaign.merchant.name}</h2>
+              <Link
+                to={`/merchant/${campaign.merchant._id}`}
+                className="merchant-card"
+              >
+                <div>
+                  <h2>{campaign.merchant.name}</h2>
+                </div>
+              </Link>
 
-              <table>
-                <tr>
-                  <th>
-                    <img
-                      src={`http://localhost:3000/img/merchants/${campaign.merchant.photo}`}
-                      alt={campaign.merchant.name}
-                    />
-                  </th>
+              <div id="StampLink">
+                <table>
+                  <tr>
+                    <th>
+                      <img
+                        src={`http://localhost:3000/img/merchants/${campaign.merchant.photo}`}
+                        alt={campaign.merchant.name}
+                      />
+                    </th>
 
-                  <th>
-                    <p>{campaign.campaign.description}</p>
-                  </th>
-                </tr>
-              </table>
+                    <th>
+                      <p>{campaign.campaign.description}</p>
+                    </th>
+                  </tr>
+                </table>
 
-              <div className="stamps">
-                {Array.from({ length: campaign.requiredStamps }, (_, index) => (
-                  <span
-                    key={index}
-                    className={`stamp ${
-                      index < campaign.stamps.length ? "stamped" : ""
-                    }`}
-                  />
-                ))}
+                <div className="stamps">
+                  {Array.from(
+                    { length: campaign.requiredStamps },
+                    (_, index) => (
+                      <span
+                        key={index}
+                        className={`stamp ${
+                          index < campaign.stamps.length ? "stamped" : ""
+                        }`}
+                      />
+                    ),
+                  )}
+                </div>
+                {
+                  /* <p> Stamps: {campaign.stamps.length} / {campaign.requiredStamps}</p>*/ ""
+                }
+                <p className="cardStatus">
+                  {cardStatus === "redeemed"
+                    ? `Redeemed on ${redeemedDate}`
+                    : ""}
+                  {cardStatus === "ready-to-redeem" ? "READY TO REDEEM" : ""}
+                </p>
               </div>
-              {
-                /* <p> Stamps: {campaign.stamps.length} / {campaign.requiredStamps}</p>*/ ""
-              }
-              <p className="cardStatus">
-                {cardStatus === "redeemed" ? `Redeemed on ${redeemedDate}` : ""}
-                {cardStatus === "ready-to-redeem" ? "READY TO REDEEM" : ""}
-              </p>
             </div>
           );
         })}
