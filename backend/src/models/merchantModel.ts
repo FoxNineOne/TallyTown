@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 
 const merchantSchema = new mongoose.Schema({
   name: {
@@ -14,8 +14,7 @@ const merchantSchema = new mongoose.Schema({
     trim: true,
   },
   merchantType: {
-    //TODO come back and link this to a lookup of merchant type! This will then require to be ID, not string
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, "Please enter a Type"],
   },
   openingHours: { type: Object },

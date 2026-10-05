@@ -8,6 +8,7 @@ interface IdParams {
   userId: string;
   reference: string;
 }
+
 // Probably should look into limit and paging.
 const getAllCampaignProgress = async (
   req: Request,

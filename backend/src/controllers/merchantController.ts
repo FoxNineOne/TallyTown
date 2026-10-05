@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import Merchants from "../models/merchantModel.js";
+import mongoose, { Model } from "mongoose";
 
 interface IdParams {
   id: string;
@@ -36,7 +37,37 @@ const getOneMerchant = async (
 ) => {
   let merchant;
   try {
-    merchant = await Merchants.findById(req.params.id);
+    //merchant = await Merchants.findById(req.params.id);
+    merchant = await Merchants.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(req.params.id),
+        },
+      },
+      {
+        $lookup: {
+          from: "merchant_types",
+          localField: "merchantType",
+          foreignField: "_id",
+          as: "merchantType",
+        },
+      },
+
+      {
+        $project: {
+          _id: 0,
+          name: "$name",
+          description: "$description",
+          merchantTypeIcon: "$merchantType.photo",
+          merchantTypeDescription: "$merchantType.description",
+          photo: "$photo",
+          address: "$address",
+          openingHours: "$openingHours",
+          location: "$location",
+        },
+      },
+    ]);
+
     // SEND RESPONSE
     if (!merchant) {
       return res.status(404).json({

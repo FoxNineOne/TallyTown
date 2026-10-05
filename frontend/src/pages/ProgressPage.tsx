@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import type { CampaignProgressResponse } from "../../../shared/types/CampaignProgress";
-import { getCampaignProgress } from "../api/campaignProgress";
+import type { CampaignProgressResponse } from "../../../shared/types/CampaignProgressType";
+import { getCampaignProgress } from "../api/campaignProgressAPI";
 import "../App.css";
 
 function Progress() {
@@ -62,7 +62,10 @@ function Progress() {
           }
 
           return (
-            <div className={`loyalty-card ${cardStatus}`} key={campaign._id}>
+            <div
+              className={`loyalty-card allowLineBreak ${cardStatus}`}
+              key={campaign._id}
+            >
               <Link
                 to={`/merchant/${campaign.merchant._id}`}
                 className="merchant-card"
