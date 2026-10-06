@@ -9,4 +9,18 @@ export default defineConfig({
   optimizeDeps: {
     include: ["leaflet", "react-leaflet"],
   },
+
+  server: {
+    host: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+      "/img": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+    },
+  },
 });

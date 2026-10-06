@@ -46,7 +46,7 @@ campaignProgressSchema.pre(/^find/, function (this: any) {
   })
     .populate({
       path: "user",
-      select: "name",
+      select: "name reference",
     })
     .populate({
       path: "campaign",
@@ -56,7 +56,7 @@ campaignProgressSchema.pre(/^find/, function (this: any) {
 const campaignProgress = mongoose.model(
   "campaign_progress", //this is what dictates the mongoDB collection  name
   campaignProgressSchema,
-  "campaign_progress",
+  "campaign_progress", // this stops mongo pluralising!
 );
 
 export default campaignProgress;

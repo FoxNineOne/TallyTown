@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 //import type { SignOptions } from "jsonwebtoken";
 import User from "../models/userModel.js";
+import Staff from "../models/staffModel.js";
 import type { Request, Response, NextFunction } from "express";
 
 import type { CookieOptions } from "express";
@@ -15,19 +16,23 @@ interface IdParams {
 //const { promisify } = require("util");
 //const crypto = require("crypto");
 const expires = process.env.JWT_EXPIRES_IN!;
-const signToken = function (id: string) {
-  return jwt.sign({ id }, process.env.JWT_SECRET!, {
+const signToken = function (
+  userId: string,
+  merchantId?: string,
+  role?: string,
+) {
+  return jwt.sign({ id: userId, merchantId, role }, process.env.JWT_SECRET!, {
     expiresIn: process.env.JWT_EXPIRES_IN! as never,
   });
 };
 
 const createSendToken = (user: any, statusCode: number, res: Response) => {
   const expiresInDays = Number(process.env.JWT_COOKIE_EXPIRES_IN!);
-  const token = signToken(user._id);
+  const token = signToken(user._id, user.merchant, user.role);
 
   const cookieOptions: CookieOptions = {
     expires: new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000),
-    httpOnly: true,
+    httpOnly: false,
   };
   if (process.env.NODE_ENV! === "production") cookieOptions.secure = true;
 
@@ -45,21 +50,16 @@ const createSendToken = (user: any, statusCode: number, res: Response) => {
 };
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
-  const { email, password } = req.body; //destructuring!
-  const passHash: string = ""; // I'm not sure why I put this here. Maybe encryption testing?
-  try {
-    if (email === "temp") {
-      return res.status(200).json({
-        status: "success",
-        message: passHash,
-      });
-    }
+  let { email, password } = req.body; //destructuring!
+  //I'm not sure if case sensitivity is a thing? It's mongo so probably?
+  email = email.toLowerCase();
 
+  try {
     //1) Check if email and password exist
     if (!email || !password) {
       return res.status(400).json({
         status: "error",
-        message: "Please provide email and password",
+        message: "Please provide email address and password",
       });
     }
     //2) Check if user exists && password is correct
@@ -68,10 +68,18 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     if (!user || !(await user.correctPassword(password, user.password))) {
       return res.status(401).json({
         status: "error",
-        message: "Incorrect email or password supplied",
+        message: "Incorrect email address or password supplied",
       });
     }
-    //3) If all okay, send token to client
+
+    // 3) if role starts with merchant, it's staff, query merchantId
+    if (user.role.slice(0, 8) === "merchant") {
+      const staff = await Staff.findOne({ user: user._id }, "+merchant._id");
+
+      user.merchant = staff?.merchant?._id;
+    } //'merchant_staff'
+
+    //4) If all okay, send token to client
     createSendToken(user, 200, res);
   } catch (err) {
     if (err instanceof Error) {

@@ -13,6 +13,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<h1> TALLY TEST </h1>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/progress" element={<Progress />} />
         <Route path="/merchant/:id" element={<Merchant />} />

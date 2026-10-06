@@ -31,7 +31,7 @@ function LoginPage() {
     console.log(`email: ${email}`);
     console.log(`pass: ${password}`);
 
-    const url = `http://localhost:3000/api/v1/user/login`;
+    const url = `/api/v1/user/login`;
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -45,13 +45,17 @@ function LoginPage() {
 
     if (!res.ok) {
       console.error(`Response status: ${res.status}`);
+      return;
     }
     try {
-      console.log(res);
       const data = await res.json();
       localStorage.setItem("jwt", data.token);
+
+      // console.log("JWT returned:", data.token);
+      // console.log("JWT stored:", localStorage.getItem("jwt"));
+      localStorage.getItem("jwt");
+
       navigate("/progress");
-      //console.log(data);
     } catch (err) {
       if (err instanceof Error) {
         console.error(err.message);

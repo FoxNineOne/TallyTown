@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Role from "./roleModel.ts";
 
 const staffSchema = new mongoose.Schema({
   merchant: {
@@ -21,6 +22,17 @@ const staffSchema = new mongoose.Schema({
     ref: "Role",
     required: true,
   },
+});
+
+staffSchema.pre(/^find/, function (this: any) {
+  if (this.getOptions().skipPopulate) return;
+  this.populate({
+    path: "role",
+    select: "description ",
+  }).populate({
+    path: "merchant",
+    select: "name _id",
+  });
 });
 
 const staff = mongoose.model("Staff", staffSchema, "staff");

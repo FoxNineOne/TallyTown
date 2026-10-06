@@ -81,7 +81,7 @@ function Merchant() {
       <div key={merchant.name}>
         <h1>
           <img
-            src={`http://localhost:3000/img/merchantTypes/${merchant.merchantTypeIcon}`}
+            src={`/img/merchantTypes/${merchant.merchantTypeIcon}`}
             alt={merchant.merchantTypeDescription}
             height={50}
             width={50}
@@ -91,9 +91,7 @@ function Merchant() {
           {merchant.name}
           {"  "}
           <img
-            src={`http://localhost:3000/img/icons/${
-              isOpen ? "opensign.png" : "closedsign.png"
-            }`}
+            src={`/img/icons/${isOpen ? "opensign.png" : "closedsign.png"}`}
             alt={isOpen ? "OPEN TODAY!" : "Closed Today"}
             height={50}
             width={50}
@@ -102,7 +100,7 @@ function Merchant() {
         </h1>
         <h3>{merchant.description}</h3>
         <img
-          src={`http://localhost:3000/img/merchants/${merchant.photo}`}
+          src={`/img/merchants/${merchant.photo}`}
           alt={merchant.name}
           height={200}
           width={200}
@@ -240,7 +238,7 @@ function Merchant() {
                     <br />
                     <br />
                     <img
-                      src={`http://localhost:3000/img/icons/loading.gif`}
+                      src={`/img/icons/loading.gif`}
                       alt="loading"
                       height={100}
                       width={100}
@@ -262,7 +260,7 @@ function Merchant() {
         <br />
         <br />
         <img
-          src={`http://localhost:3000/img/icons/loading.gif`}
+          src={`/img/icons/loading.gif`}
           alt="loading"
           height={100}
           width={100}

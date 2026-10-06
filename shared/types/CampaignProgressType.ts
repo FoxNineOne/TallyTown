@@ -19,6 +19,7 @@ export interface CampaignProgress {
   user: {
     _id: string;
     name: string;
+    reference: string;
   };
   requiredStamps: number;
   stamps: Stamp[];

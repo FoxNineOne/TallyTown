@@ -1,17 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 import type { CampaignProgressResponse } from "../../../shared/types/CampaignProgressType";
 import { getCampaignProgress } from "../api/campaignProgressAPI";
 import "../App.css";
 
+import { QRCodeSVG } from "qrcode.react";
+
+interface JwtPayload {
+  id: string;
+  merchantId?: string;
+  role: string;
+}
+
 function Progress() {
-  // TEMP TODO REMOVE THIS AND READ FROM JWT!!
-  const userId = "6a1eebac333ddc7e8f19c6e7";
-  //
+  const token = localStorage.getItem("jwt");
+  if (!token) {
+    return <p>You need to log in to view your loyalty cards.</p>;
+  }
+  const decoded = jwtDecode<JwtPayload>(token!);
+  const userId = decoded.id;
+
   const [campaigns, setCampaigns] = useState<
     CampaignProgressResponse["data"]["campaigns"]
   >([]);
   const [showRedeemed, setShowRedeemed] = useState(false);
+
   useEffect(() => {
     async function fetchCampaignProgress() {
       try {
@@ -27,6 +42,22 @@ function Progress() {
 
     fetchCampaignProgress();
   }, []);
+
+  const [qrData, setQrData] = useState<string>("");
+  const [showQr, setShowQr] = useState(false);
+  let modalText: string;
+  const stampClick = (campaignProgressRef, userRef, cardStatus) => {
+    modalText = cardStatus;
+    console.log(modalText);
+    console.log(cardStatus);
+    const qrData = JSON.stringify({
+      campaignProgressRef,
+      userRef,
+    });
+
+    setQrData(qrData);
+    setShowQr(true);
+  };
 
   return (
     <div className="page">
@@ -60,6 +91,14 @@ function Progress() {
           } else {
             cardStatus = "active";
           }
+          let cardclickTitle: string = "Click to ";
+          if (cardStatus) {
+          }
+          if (campaign.stamps.length === campaign.requiredStamps) {
+            cardclickTitle += "redeem!";
+          } else {
+            cardclickTitle += "stamp your loyalty card!";
+          }
 
           return (
             <div
@@ -74,13 +113,30 @@ function Progress() {
                   <h2>{campaign.merchant.name}</h2>
                 </div>
               </Link>
+              {
+                // Card Click Area
+              }
 
-              <div id="StampLink">
+              <div
+                id="StampLink"
+                title={cardclickTitle}
+                onClick={() =>
+                  stampClick(
+                    campaign.reference,
+                    campaign.user.reference,
+                    cardStatus,
+                  )
+                }
+              >
+                {
+                  //qrData && <QRCodeSVG value={qrData} />
+                }
+
                 <table>
                   <tr>
                     <th>
                       <img
-                        src={`http://localhost:3000/img/merchants/${campaign.merchant.photo}`}
+                        src={`/img/merchants/${campaign.merchant.photo}`}
                         alt={campaign.merchant.name}
                       />
                     </th>
@@ -104,9 +160,6 @@ function Progress() {
                     ),
                   )}
                 </div>
-                {
-                  /* <p> Stamps: {campaign.stamps.length} / {campaign.requiredStamps}</p>*/ ""
-                }
                 <p className="cardStatus">
                   {cardStatus === "redeemed"
                     ? `Redeemed on ${redeemedDate}`
@@ -117,6 +170,17 @@ function Progress() {
             </div>
           );
         })}
+      {showQr && (
+        <div className="qr-overlay" onClick={() => setShowQr(false)}>
+          <div className="qr-modal" onClick={(e) => e.stopPropagation()}>
+            <QRCodeSVG className="qr-code" value={qrData} />
+            <button className="qr-btn" onClick={() => setShowQr(false)}>
+              X
+            </button>
+            <p className="qr-text allowLineBreak">{` Show this to a member of staff \n ${modalText === "ready-to-redeem" ? "to REDEEM!" : "to get more stamps!"}`}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
