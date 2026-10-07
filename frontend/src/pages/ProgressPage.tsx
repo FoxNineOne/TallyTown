@@ -32,8 +32,6 @@ function Progress() {
       try {
         const data = await getCampaignProgress(userId);
 
-        console.log(data);
-
         setCampaigns(data.data.campaigns);
       } catch (err) {
         console.error(err);
@@ -42,21 +40,43 @@ function Progress() {
 
     fetchCampaignProgress();
   }, []);
-
+  const [ShowQrModal, setShowQrModal] = useState(false);
   const [qrData, setQrData] = useState<string>("");
   const [showQr, setShowQr] = useState(false);
-  let modalText: string;
-  const stampClick = (campaignProgressRef, userRef, cardStatus) => {
-    modalText = cardStatus;
-    console.log(modalText);
-    console.log(cardStatus);
+  const [stampCodes, setStampCodes] = useState<string>("");
+  const [showStampCodes, setShowStampCodes] = useState(false);
+  const [modalText, setModalText] = useState<string>("");
+
+  const stampClick = (
+    campaignProgressRef: string,
+    userRef: string,
+    cardStatus: string,
+  ) => {
+    setModalText(cardStatus);
+
     const qrData = JSON.stringify({
       campaignProgressRef,
       userRef,
     });
 
+    setStampCodes(
+      `${(campaignProgressRef + userRef).match(/.{1,4}/g).join("\n")}`,
+    );
+
+    //    console.log(campaignProgressRef, userRef);
     setQrData(qrData);
     setShowQr(true);
+    setShowQrModal(true);
+  };
+
+  const toggleQRContent = () => {
+    if (showQr) {
+      setShowQr(false);
+      setShowStampCodes(true);
+    } else {
+      setShowQr(true);
+      setShowStampCodes(false);
+    }
   };
 
   return (
@@ -104,6 +124,7 @@ function Progress() {
             <div
               className={`loyalty-card allowLineBreak ${cardStatus}`}
               key={campaign._id}
+              data-status={cardStatus}
             >
               <Link
                 to={`/merchant/${campaign.merchant._id}`}
@@ -170,11 +191,24 @@ function Progress() {
             </div>
           );
         })}
-      {showQr && (
-        <div className="qr-overlay" onClick={() => setShowQr(false)}>
+      {ShowQrModal && (
+        <div className="qr-overlay" onClick={() => setShowQrModal(false)}>
           <div className="qr-modal" onClick={(e) => e.stopPropagation()}>
-            <QRCodeSVG className="qr-code" value={qrData} />
-            <button className="qr-btn" onClick={() => setShowQr(false)}>
+            {showQr ? (
+              <QRCodeSVG
+                className="qr-code"
+                value={qrData}
+                onClick={toggleQRContent}
+              />
+            ) : (
+              <div className="qr-code-codeText" onClick={toggleQRContent}>
+                {/* {stampCodes.campaignProgressRef}
+                <br />
+                {stampCodes.userRef}  */}
+                {stampCodes}
+              </div>
+            )}
+            <button className="qr-btn" onClick={() => setShowQrModal(false)}>
               X
             </button>
             <p className="qr-text allowLineBreak">{` Show this to a member of staff \n ${modalText === "ready-to-redeem" ? "to REDEEM!" : "to get more stamps!"}`}</p>

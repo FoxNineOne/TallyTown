@@ -19,6 +19,11 @@ export default function Header() {
       <div className="header-center">
         <h1>
           <a href="/">TallyTown</a>
+          <img
+            className="header-image"
+            src="/img/icons/TallyIcon_White_500.png"
+            alt="TallyTown Logo"
+          />
         </h1>
       </div>
       <div className="header-right">{/* Future content goes here */}</div>

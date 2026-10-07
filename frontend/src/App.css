@@ -42,6 +42,12 @@
   width: 97%;
   border-bottom: 4px solid #5c6074; /*#2e303a;*/
 }
+.header-image {
+  max-width: 50px;
+}
+.header-center h1 {
+  font-size: max(3rem, 6vw);
+}
 .footer {
   align-items: center;
   text-align: center;
@@ -588,6 +594,21 @@ input:checked + .slider:before {
   width: min(60vw, 400px);
   height: auto;
 }
+
+.qr-code-codeText {
+  aspect-ratio: 1 / 1;
+  width: min(60vw, 400px);
+  color: #212121;
+  text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: min(5rem, 12vw);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: 0.3em;
+}
+
 .qr-btn {
   position: absolute;
   width: min(10vw, 50px);
@@ -626,7 +647,7 @@ input:checked + .slider:before {
   position: absolute;
   width: 100%;
   left: 0%;
-  top: 110%;
+  top: 120%;
   color: #fff;
   text-align: center;
   color: #fff;
@@ -634,7 +655,7 @@ input:checked + .slider:before {
   font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  line-height: 1.3;
+  line-height: 1.5;
 }
 @media (max-width: 600px) {
   .qr-btn {

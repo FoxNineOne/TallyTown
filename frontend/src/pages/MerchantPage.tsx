@@ -238,7 +238,7 @@ function Merchant() {
                     <br />
                     <br />
                     <img
-                      src={`/img/icons/loading.gif`}
+                      src={"/img/icons/TT_loading.gif"}
                       alt="loading"
                       height={100}
                       width={100}
@@ -260,7 +260,7 @@ function Merchant() {
         <br />
         <br />
         <img
-          src={`/img/icons/loading.gif`}
+          src={"/img/icons/TT_loading.gif"}
           alt="loading"
           height={100}
           width={100}
